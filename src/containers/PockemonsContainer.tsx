@@ -1,23 +1,21 @@
 import React from 'react';
 import {useQuery} from '@apollo/client';
-import {GET_POKEMONS, PokemonsData, PokemonVars} from '../graphql/get-pokemons';
+import {GET_POKEMONS, IPokemonsData, IPokemonVars} from '../graphql/get-pokemons';
+import {Pokemon} from '../components/Pokemon';
 
 export const PokemonsContainer: React.FC = () => {
-    const {data: {pokemons = []} = {}} = useQuery<PokemonsData, PokemonVars>(GET_POKEMONS, {
+
+    const {data: {pokemons = []} = {}} = useQuery<IPokemonsData, IPokemonVars>(GET_POKEMONS, {
         variables: {first: 9}
     })
-    return (
-        <div className='pokemons'>
-            {pokemons.map(pokemon => JSON.stringify(pokemon))}
-        </div>
-    );
-}
-
-export const Pokemon: React.FC = () => {
 
     return (
-        <div>
-            <p>start</p>
+        <div className='container'>
+            {
+                pokemons.map(p => {
+                    return <Pokemon key={p.id} pokemon={p}/>
+                })
+            }
         </div>
     );
 }

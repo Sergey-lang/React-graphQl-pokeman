@@ -1,11 +1,7 @@
-import React from "react";
-import {
-    ApolloClient,
-    createHttpLink,
-    InMemoryCache,
-    ApolloProvider
-} from "@apollo/client";
+import React from 'react';
+import './App.css'
 import {PokemonsContainer} from './containers/PockemonsContainer';
+import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client';
 
 export const link = createHttpLink({
     uri: 'https://graphql-pokemon2.now.sh'
@@ -17,7 +13,6 @@ export const client = new ApolloClient({
 });
 
 export const App: React.FC = () => {
-
     return (
         <ApolloProvider client={client}>
             <div>

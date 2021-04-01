@@ -1,23 +1,23 @@
 import {gql} from '@apollo/client';
 
-interface Attacks {
-   special: {name: string, damage: number}
+export interface IPokemon {
+    id: number;
+    name: string;
+    maxCP: number;
+    maxHP: number;
+    image: string;
+    attacks: {
+        fast: Array<{ __typename: string, name: string, damage: number }>;
+        special: Array<{ __typename: string, name: string, damage: number }>;
+    };
+    __typename: string;
 }
 
-interface Pokemon {
-    id: string,
-    name: string,
-    image: string,
-    maxHP: number,
-    maxCP: number,
-    attacks: Attacks
+export interface IPokemonsData {
+    pokemons: IPokemon[];
 }
 
-export interface PokemonsData {
-    pokemons: Pokemon[];
-}
-
-export interface PokemonVars {
+export interface IPokemonVars {
     first: number;
 }
 
@@ -38,3 +38,4 @@ export const GET_POKEMONS = gql`
         }
     }
 `;
+
